@@ -1,0 +1,4 @@
+.env
+config/cloud_storage/gcs.json
+config/credentials/API_Portal.jks
+mandiri_api
