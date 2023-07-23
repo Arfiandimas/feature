@@ -2,15 +2,16 @@ package api
 
 import (
 	"mandiri_payment_gateway_service/base"
+	user_controller "mandiri_payment_gateway_service/cmd/controllers/user"
 	middlewares "mandiri_payment_gateway_service/guard"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-type api struct{}
+type Api struct{}
 
-func (a api) Do(router *base.Router) {
+func (a Api) Do(router *base.Router) {
 	api := router.Group("/api", middlewares.AppMiddleware{}.Do())
 
 	// Just for example
@@ -24,8 +25,11 @@ func (a api) Do(router *base.Router) {
 		})
 	})
 
+	apiUser := api.Group("/user")
+	apiUser.GET("/", user_controller.UserController{}.Get)
+
 }
 
-func Init() api {
-	return api{}
+func Init() Api {
+	return Api{}
 }
