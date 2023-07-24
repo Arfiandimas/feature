@@ -5,13 +5,14 @@ import (
 	"mandiri_payment_gateway_service/internal/response"
 )
 
-type GetUserService struct {
+type FindUserService struct {
+	Id int
 }
 
-func (s GetUserService) Do() response.ServiceResponse {
-	getUsers, errorFetch := user_repositories.UserRepository{}.GetUser()
+func (s FindUserService) Do() response.ServiceResponse {
+	findUser, errorFetch := user_repositories.UserRepository{}.FindUser(s.Id)
 	if errorFetch != nil {
 		return response.Service().Error("error", errorFetch.Error())
 	}
-	return response.Service().Success("success", getUsers)
+	return response.Service().Success("success", findUser)
 }

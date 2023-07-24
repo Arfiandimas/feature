@@ -27,7 +27,7 @@ func (a Api) Do(router *base.Router) {
 
 	apiUser := api.Group("/user")
 	apiUser.GET("/", user_controller.UserController{}.Get)
-
+	apiUser.GET(":id", user_controller.UserController{}.Find)
 }
 
 func Init() Api {
