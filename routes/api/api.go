@@ -29,6 +29,7 @@ func (a Api) Do(router *base.Router) {
 	apiUser.GET("/", user_controller.UserController{}.Get)
 	apiUser.GET(":id", user_controller.UserController{}.Find)
 	apiUser.POST("/", user_controller.UserController{}.Store)
+	apiUser.PUT(":id", user_controller.UserController{}.Update)
 }
 
 func Init() Api {

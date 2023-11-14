@@ -54,3 +54,26 @@ func (c UserController) Store(ctx *gin.Context) {
 	ctx.JSON(400, response.Api().Success(service.Message, "Find", service.Data))
 	return
 }
+
+func (c UserController) Update(ctx *gin.Context) {
+	id := ctx.Param("id")
+	intVal, _ := strconv.Atoi(id)
+	method := "update"
+
+	// binding the request data
+	requestDTO := user_request.UserUpdateRequest{}
+	if err := ctx.ShouldBind(&requestDTO); err != nil {
+		ctx.JSON(400, response.Api().Error(err.Error(), method, nil))
+		return
+	}
+
+	service := user_service.UpdateUserService{
+		Request: requestDTO,
+		Id:      intVal,
+	}.Do()
+	if !service.Status {
+		ctx.JSON(400, response.Api().Error(service.Message, "Create", service.Data))
+	}
+	ctx.JSON(400, response.Api().Success(service.Message, "Find", service.Data))
+	return
+}
