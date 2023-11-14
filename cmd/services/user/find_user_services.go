@@ -1,7 +1,7 @@
 package user_service
 
 import (
-	"mandiri_payment_gateway_service/cmd/repositories/Users"
+	"mandiri_payment_gateway_service/cmd/repositories/user"
 	"mandiri_payment_gateway_service/internal/response"
 )
 
